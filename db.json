@@ -1,0 +1,9 @@
+{
+  "users": [
+    {
+      "username": "malsomnus",
+      "password": "#totally_secure_password#",
+      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbHNvbW51cyIsImlhdCI6MTYzNDY4NDc4MX0.XFTIcptirppUc4dNlGKc44fDbSElrbk3fdxCUc7ZbSM"
+    }
+  ]
+}
