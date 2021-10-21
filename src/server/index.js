@@ -5,6 +5,7 @@ import { Low, JSONFile } from 'lowdb'
 import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
+import SECRET from '../../secret.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -35,13 +36,13 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 // app.use(authorization);
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 function getDb() {
     const file = join(__dirname, 'db.json')
     const adapter = new JSONFile(file)
     return new Low(adapter);
 }
-
-const SECRET = 'idonotreallyneedapropersecret';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
