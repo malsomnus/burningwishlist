@@ -96,7 +96,7 @@ function App(props) {
     }
 
     async function onAddCard(name) {
-        const rawResponse = await axios.post('/addcard', { content: 'hello world' });
+        const rawResponse = await axios.post('/addcard', { name: 'Gitaxian Probe' });
         const content = await rawResponse.json();
         console.log(content)
     }

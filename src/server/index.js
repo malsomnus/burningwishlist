@@ -22,7 +22,6 @@ function authorization(req, res, next) {
     try {
         const data = jwt.verify(token, SECRET);
         req.userId = data.id;
-        req.userRole = data.role;
         return next();
     } catch {
         console.log('Unauthorized attempt');
@@ -43,6 +42,19 @@ function getDb() {
     const adapter = new JSONFile(file)
     return new Low(adapter);
 }
+
+async function withUserObject(req, func) {
+    const db = getDb();
+    await db.read();
+    
+    const { username } = jwt.verify(req.cookies.access_token, SECRET);
+    const users = db?.data?.users;
+
+    const userObject = (users || []).find(user => user.username === username);
+    (func || (() => {}))(userObject);
+    return userObject;
+}
+
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -86,7 +98,7 @@ app.post('/login', async (req, res) => {
     console.log('Attempted login:', username);
     const db = getDb();
     await db.read();
-    const users = db.data.users;
+    const users = db?.data?.users;
 
     const idx = (users || []).findIndex(user => user.username === username && user.password === password);
 
@@ -110,21 +122,29 @@ app.post('/login', async (req, res) => {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.get('/logout', authorization, (req, res) => {
-  return res.clearCookie('access_token').status(200).json({ message: 'Logged out!' });
+    return res.clearCookie('access_token').status(200).json({ message: 'Logged out!' });
+});
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+app.post('/getcards', authorization, async (req, res) => {
+    const userObject = await getUserObject(req);
+    req.status(200).send(userObject.cards);
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.post('/addcard', authorization, async (req, res) => {
-    // console.log(req.body)
-    // console.log(process.env.NODE_ENV)
+    const userObject = await withUserObject(req, userObject => {
+        userObject.cards.push({
+            name: req.body.name,
+            amount: 0,
+        });
+    })
+    console.log(userObject)
+    // await db.write();
 
-    const db = getDb();
-    await db.read();
-    // db.data ||= { posts: [] };
-    // await db.write()
-
-    console.log('successfully called addcard')
+    console.log('Successfully added card:', req.body.name);
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
