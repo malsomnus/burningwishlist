@@ -38,12 +38,12 @@ app.use(cookieParser());
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function getDb() {
-    const file = join(__dirname, 'db.json')
-    const adapter = new JSONFile(file)
+    const file = join(__dirname, 'db.json');
+    const adapter = new JSONFile(file);
     return new Low(adapter);
 }
 
-async function withUserObject(req, func) {
+async function getUserObject(req) {
     const db = getDb();
     await db.read();
     
@@ -51,8 +51,14 @@ async function withUserObject(req, func) {
     const users = db?.data?.users;
 
     const userObject = (users || []).find(user => user.username === username);
-    (func || (() => {}))(userObject);
-    return userObject;
+
+    return {
+        ...userObject,
+        modify: func => {
+            (func || (() => {}))(userObject);
+            db.write();
+        },
+    };
 }
 
 
@@ -60,7 +66,13 @@ async function withUserObject(req, func) {
 
 // app.get('/', (req, res) => {
 //     console.log('Serving website');
-//     res.sendFile(path.join(__dirname, '..', '..', 'build', 'index.html'));
+//     if (process.env.NODE_ENV === 'production') {
+//         res.sendFile(path.join(__dirname, '..', '..', 'build', 'index.html'));
+//     } 
+//     else {
+//         console.log(path.join(__dirname, '..', '..', 'public', 'index.html'))
+//         res.sendFile(path.join(__dirname, '..', '..', 'build', 'index.html'));
+//     }    
 // });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -107,7 +119,8 @@ app.post('/login', async (req, res) => {
         users[idx].jwt = token;
         await db.write();
 
-        res.cookie('access_token', token/*, { httpOnly: true, secure: process.env.NODE_ENV === 'production' }*/)
+        // res.cookie('access_token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
+        res.cookie('access_token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
             .status(200)
             .json({ message: 'Great success!' });
 
@@ -127,24 +140,26 @@ app.get('/logout', authorization, (req, res) => {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-app.post('/getcards', authorization, async (req, res) => {
+app.get('/getcards', authorization, async (req, res) => {
     const userObject = await getUserObject(req);
-    req.status(200).send(userObject.cards);
+    res.status(200).send(userObject.cards);
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.post('/addcard', authorization, async (req, res) => {
-    const userObject = await withUserObject(req, userObject => {
+
+    // todo: don't add a card that's already on the list
+
+    const userObject = await getUserObject(req);
+    userObject.modify(userObject => {
         userObject.cards.push({
             name: req.body.name,
             amount: 0,
         });
-    })
-    console.log(userObject)
-    // await db.write();
+    });
 
-    console.log('Successfully added card:', req.body.name);
+    res.status(200).send(userObject.cards);
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

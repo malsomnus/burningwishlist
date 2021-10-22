@@ -3,7 +3,12 @@ import { Helmet } from 'react-helmet';
 import TrieSearch from 'trie-search';
 import axios from 'axios';
 import Login from './Login';
+import CardPanel from './CardPanel';
 import './App.scss';
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+window.logout = () => axios.get('/logout');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -24,58 +29,31 @@ async function fetchCardData(cb) {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function parseManaCost(manaCost) {
-    // I have no idea how this regex works, so best not to question it. What it actually does is
-    // look for groups of symbols in curly braces and separate them into a nice array, 
-    // e.g. taking the string '{W}{W/B}{B}' and turning it into ['W', 'W/B', 'B'].
-    // The second part there removes the slashes and makes the whole thing lowercase.
-
-    if (!manaCost) return [];
-    return manaCost.match(/(?<=\{).+?(?=\})/g).map(str => str.replace(/\//g, '').toLowerCase());
-}
-
-function manaSymbolFromString(str) {
-    return (
-        <i className={`ms ms-cost ms-${str}`}></i>
-    );
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-const list = [
-    { name: 'Whip of Erebos' },
-    { name: 'Replenish' },
-    { name: 'Reversal of Fortune' },
-    { name: 'Summoning Station' },
-    { name: 'Semblance Anvil' },
-    { name: 'Cloud Key' },
-    { name: 'Clearwater Pathway' },
-    { name: 'Savai Triome' },
-    { name: 'Song of the Worldsoul' },
-    { name: 'Coastal Piracy' },
-    { name: 'Mistblade Shinobi' },
-    { name: 'Thalakos Seer' },
-    { name: 'Cauldron Haze' },
-    { name: 'Alela, Artful Provocateur' },
-    { name: 'Athreos, Shroud-Veiled' },
-    { name: 'Gyruda, Doom of Depths' },
-    { name: 'Unbound Flourishing' },
-    { name: 'Mana Reflection' },
-    { name: 'Living Lands' },
-    { name: 'Nature\'s Revolt' },
-    { name: 'Master Warcraft' },
-    { name: 'Kozilek, Butcher of Truth' },
-    { name: 'Akroma\'s Memorial' },
-    { name: 'Kodama of the East Tree' },
-    { name: 'Gitaxian Probe' },
-];
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 function App(props) {
     const [cardData, setCardData] = useState({});
     const [cardsTrie, setCardsTrie] = useState({});
     const [showLogin, setShowLogin] = useState(false);
+    const [cardsList, setCardsList] = useState([]);
+
+    //
+
+    async function getCards() {
+        try {
+            const res = await axios.get('/getcards');
+            setCardsList(res.data);
+        }
+        catch (e) {
+            if (e.response.status === 403) {
+                console.error('Error: not logged in');
+                setShowLogin(true);
+            }
+            else {
+                console.error('Unexpected error');
+            }
+        };
+    }
+
+    //
 
     useEffect(() => {
         (async () => {
@@ -88,6 +66,8 @@ function App(props) {
         })();
     }, []);
 
+    useEffect(getCards, []);
+
     //
 
     function getCard(name) {
@@ -95,10 +75,14 @@ function App(props) {
         return cardData[name] || {};
     }
 
+    function onSuccessfulLogin() {
+        getCards();
+        setShowLogin(false);
+    }
+
     async function onAddCard(name) {
-        const rawResponse = await axios.post('/addcard', { name: 'Gitaxian Probe' });
-        const content = await rawResponse.json();
-        console.log(content)
+        const res = await axios.post('/addcard', { name: 'Dark Ritual' });
+        setCardsList(res.data);
     }
 
     //
@@ -110,27 +94,19 @@ function App(props) {
                 <link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.min.css" rel="stylesheet" type="text/css" />
             </Helmet>
             
-            <header className="App-header">
-                Cards!
-            </header>
-
             {showLogin ? (
-                <Login onSuccess={() => setShowLogin(false)} />         
+                <Login onSuccess={onSuccessfulLogin} />         
             ) : (
                 <>
                     <button onClick={onAddCard}>Add</button>
-                    <button onClick={() => axios.get('/createuser', { username: 'malsomnus', password: 'test' })}>Create User</button>
-                    <button onClick={() => setShowLogin(true)}>Log in</button>
-                    <button onClick={() => axios.get('/logout')}>Log out</button>
+                    {/*<button onClick={() => axios.get('/createuser', { username: 'malsomnus', password: 'test' })}>Create User</button>*/}
+                    {/*<button onClick={() => setShowLogin(true)}>Log in</button>*/}
+                    {/*<button onClick={() => axios.get('/logout')}>Log out</button>*/}
 
                     <ul className='cards-list'>
-                        {list.map((card, idx) => (
-                            <li key={card.name + idx}>
-                                🗸
-                                {card.name}
-                                <div className='mana-cost'>
-                                    {parseManaCost(getCard(card.name).manaCost).map(manaSymbolFromString)}
-                                </div>
+                        {cardsList.map((card, idx) => (
+                            <li key={card.name + idx} className={card.amount > 0 ? 'checked' : ''}>
+                                <CardPanel card={{ ...getCard(card.name), amount: card.amount }} />
                             </li>
                         ))}
                     </ul>

@@ -1,0 +1,30 @@
+.card-panel {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &.checked {
+        // background-color: #dfd;
+    }
+
+    >.checkmark {
+        flex: 0;
+        font-weight: bold;
+        margin-right: 4px;
+        transform: translateY(1px);
+    }
+
+    >.card-name {
+        flex: 1;
+    }
+
+    >.mana-cost {
+        flex: 0;
+        display: flex;
+
+        >i {
+            margin-left: 2px;
+        }
+    }
+}

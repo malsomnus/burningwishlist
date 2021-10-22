@@ -1,0 +1,32 @@
+form.login {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 24px;
+
+    >input {
+        margin-bottom: 8px;
+        font-size: 16px;
+        padding: 4px 16px;
+        border: solid 1px #555;
+
+        &:focus {
+            outline: none;
+            border-width: 2px;
+            padding: 3px 15px;
+        }
+    }
+
+    >button[type="submit"] {
+        font-size: 16px;
+        padding: 8px 16px;
+        color: #fff;
+        background-color: #888;
+        border: outset 3px #888;
+        cursor: pointer;
+        outline: none;
+
+        &:hover, &:focus, &:active {
+            border-style: inset;
+        }
+    }
+}

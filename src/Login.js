@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import './Login.scss';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -9,10 +10,10 @@ export default function LoginPage(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    async function onLogin() {
+    async function onLogin(e) {
+        e.preventDefault();
         try {
             const res = await axios.post('/login', { username: username, password: password });
-            console.log(res)
             onSuccess();
         }
         catch (e) {
@@ -22,10 +23,20 @@ export default function LoginPage(props) {
     }
     
     return (
-        <section>
-            <input value={username} onChange={e => setUsername(e.target.value)} />
-            <input value={password} onChange={e => setPassword(e.target.value)} />
-            <button type='button' onClick={onLogin}>Login</button>
-        </section>
+        <form className='login' onSubmit={onLogin}>
+            <input 
+                autoFocus 
+                value={username} 
+                onChange={e => setUsername(e.target.value)} 
+            />
+
+            <input 
+                type='password'
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+            />
+            
+            <button type='submit'>Login</button>
+        </form>
     );
 }

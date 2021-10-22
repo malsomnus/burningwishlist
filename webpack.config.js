@@ -1,17 +1,29 @@
 const path = require("path");
 
 const config = {
+    // entry: {
+    //     vendor: ["@babel/polyfill", "react"], // Third party libraries
+    //     index: ["./src/components/entrypoints/index.jsx"]
+    //     /// Every pages entry point should be mentioned here
+    // },
     entry: {
-        vendor: ["@babel/polyfill", "react"], // Third party libraries
-        index: ["./src/components/entrypoints/index.jsx"]
-        /// Every pages entry point should be mentioned here
+        index: './src/index.js',
     },
     output: {
         path: path.resolve(__dirname, "src", "public"), //destination for bundled output is under ./src/public
-        filename: "[name].js" // names of the bundled file will be name of the entry files (mentioned above)
+        filename: "[name].js", // names of the bundled file will be name of the entry files (mentioned above)
+        publicPath: '/public/',
     },
     module: {
         rules: [
+            {
+                test: /\.s[ac]ss$/i,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },    
             {
                 test: /\.(js|jsx)$/,
                 use: {
