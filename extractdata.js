@@ -8,6 +8,7 @@ function extractCardData(card) {
         cmc: card.convertedManaCost,
         manaCost: card.manaCost,
         name: card.name,
+        faceName: card.faceName,
         // sets: card.printings,
         // multiverseId: card.multiverseId,
         color: (colors => {

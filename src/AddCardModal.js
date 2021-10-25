@@ -12,9 +12,11 @@ export default function AddCardModal(props) {
     const cardDataContext = useCardDataContext();
 
     const matches = cardDataContext.cardNameTrie.get(name).map(match => match.value);
-console.log(matches)
-console.log(matches.map(card => cardDataContext.getCard(card.name)))
     const cardNameIsIllegal = cardDataContext.getCard(name).name === undefined;
+
+    function onClickCard(card) {
+        setName(card.faceName || card.name);
+    }
 
     let listContent;
     if (matches.length === 0) {
@@ -34,8 +36,8 @@ console.log(matches.map(card => cardDataContext.getCard(card.name)))
     else {
         listContent = (
             matches.length <= 15 && matches.map(card => (
-                <li onClick={() => setName(cardDataContext.getCard(card.name).name)}>
-                    <CardPanel card={{ ...cardDataContext.getCard(card.name), amount: card.amount }} />
+                <li onClick={() => onClickCard(cardDataContext.getCard(card.faceName || card.name))}>
+                    <CardPanel card={{ ...cardDataContext.getCard(card.faceName || card.name), amount: card.amount }} />
                 </li>
             ))
         );

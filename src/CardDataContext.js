@@ -29,6 +29,7 @@ export default function UiContext(props) {
             const trie = new TrieSearch();
             trie.addFromObject(cardData);
             setCardNameTrie(trie);
+            window.trie=trie
         },
         getCard: name => cardData[name] || {},
     };
