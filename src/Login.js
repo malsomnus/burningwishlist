@@ -13,7 +13,7 @@ export default function LoginPage(props) {
     async function onLogin(e) {
         e.preventDefault();
         try {
-            const res = await axios.post('/login', { username: username, password: password });
+            await axios.post('/login', { username: username, password: password });
             onSuccess();
         }
         catch (e) {

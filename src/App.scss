@@ -17,7 +17,18 @@ body {
 .app {
     width: 600px;
     height: 100%;
-    background-color: #bbb;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    >button.add-card, >button.print-list {
+        width: 100%;
+        font-size: 20px;
+        padding: 8px;
+        cursor: pointer;
+        flex: 0;
+    }
 
     ul.cards-list {
         background-color: #fff;
@@ -26,6 +37,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        flex: 1;
 
         >li {
             list-style-type: none;

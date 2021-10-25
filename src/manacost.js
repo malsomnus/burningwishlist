@@ -13,7 +13,3 @@ export function manaSymbolFromString(str) {
         <i className={`ms ms-cost ms-${str}`}></i>
     );
 }
-export default {
-    parseManaCost,
-    manaSymbolFromString,
-};

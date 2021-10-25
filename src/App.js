@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import TrieSearch from 'trie-search';
 import axios from 'axios';
+import { useUiContext } from './UiContext';
+import { useCardDataContext } from './CardDataContext';
 import Login from './Login';
+import AddCardModal from './AddCardModal';
 import CardPanel from './CardPanel';
 import './App.scss';
 
@@ -35,6 +38,9 @@ function App(props) {
     const [showLogin, setShowLogin] = useState(false);
     const [cardsList, setCardsList] = useState([]);
 
+    const uiContext = useUiContext();
+    const cardDataContext = useCardDataContext();
+
     //
 
     async function getCards() {
@@ -43,7 +49,8 @@ function App(props) {
             setCardsList(res.data);
         }
         catch (e) {
-            if (e.response.status === 403) {
+            console.log(e)
+            if (e?.response?.status === 403) {
                 console.error('Error: not logged in');
                 setShowLogin(true);
             }
@@ -58,11 +65,8 @@ function App(props) {
     useEffect(() => {
         (async () => {
             const cardData = await fetchCardData();
-            setCardData(cardData);
             window.cards = cardData;
-            const trie = new TrieSearch()
-            trie.addFromObject(cardData);
-            setCardsTrie(trie);
+            cardDataContext.setCardData(cardData);
         })();
     }, []);
 
@@ -70,19 +74,20 @@ function App(props) {
 
     //
 
-    function getCard(name) {
-        // Just to make sure it fails gracefully before card data is fetched
-        return cardData[name] || {};
-    }
-
     function onSuccessfulLogin() {
         getCards();
         setShowLogin(false);
     }
 
     async function onAddCard(name) {
-        const res = await axios.post('/addcard', { name: 'Dark Ritual' });
-        setCardsList(res.data);
+        const bloop = await uiContext.showModal({ content: <AddCardModal cardsList={cardsList} /> });
+        console.log(bloop)
+        // const res = await axios.post('/addcard', { name: 'Dark Ritual' });
+        // setCardsList(res.data);
+    }
+
+    function onPrintList() {
+        console.log('print list')
     }
 
     //
@@ -98,22 +103,19 @@ function App(props) {
                 <Login onSuccess={onSuccessfulLogin} />         
             ) : (
                 <>
-                    <button onClick={onAddCard}>Add</button>
-                    {/*<button onClick={() => axios.get('/createuser', { username: 'malsomnus', password: 'test' })}>Create User</button>*/}
-                    {/*<button onClick={() => setShowLogin(true)}>Log in</button>*/}
+                    <button className='add-card' onClick={onAddCard}>Add</button>
                     {/*<button onClick={() => axios.get('/logout')}>Log out</button>*/}
 
                     <ul className='cards-list'>
                         {cardsList.map((card, idx) => (
                             <li key={card.name + idx} className={card.amount > 0 ? 'checked' : ''}>
-                                <CardPanel card={{ ...getCard(card.name), amount: card.amount }} />
+                                <CardPanel card={{ ...cardDataContext.getCard(card.name), amount: card.amount }} />
                             </li>
                         ))}
                     </ul>
+                    <button className='print-list' onClick={onPrintList}>Print list</button>
                 </>
             )}
-
-            
         </div>
     );
 }

@@ -5,6 +5,7 @@ import { Low, JSONFile } from 'lowdb'
 import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
+import bcrypt from 'bcrypt';
 import SECRET from '../../secret.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -33,7 +34,7 @@ app.use(express.static(path.join(__dirname, '..', '..', 'build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-// app.use(authorization);
+// app.use(authorization);  // Nope, this would apply the authorization function to EVERYTHING, including login, which makes no sense
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -61,20 +62,15 @@ async function getUserObject(req) {
     };
 }
 
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 // app.get('/', (req, res) => {
-//     console.log('Serving website');
 //     if (process.env.NODE_ENV === 'production') {
 //         res.sendFile(path.join(__dirname, '..', '..', 'build', 'index.html'));
 //     } 
 //     else {
-//         console.log(path.join(__dirname, '..', '..', 'public', 'index.html'))
 //         res.sendFile(path.join(__dirname, '..', '..', 'build', 'index.html'));
 //     }    
 // });
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.get('/carddata', (req, res) => {
@@ -87,20 +83,22 @@ app.get('/carddata', (req, res) => {
 app.get('/createuser', async (req, res) => {
     // const { username, password } = req.body;
     const username = 'malsomnus';
-    const password = '#totally_secure_password#';
+    const password = '#passWORD1';
     
-    // todo: hash password
+    bcrypt.hash(password, 10, async function(err, hash) {
+        const db = getDb();
+        await db.read();
+        db.data ||= { users: [] };
+        const { users } = db.data;
+        users.push({ 
+            username: username, 
+            password: hash,
+            cards: [],
+        });
+        await db.write(); 
 
-    const db = getDb();
-    await db.read();
-    db.data ||= { users: [] };
-    const { users } = db.data;
-    users.push({ 
-        username: username, 
-        password: password,
-        cards: [],
+        res.status(200).send('Good job');
     });
-    await db.write();
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -112,23 +110,34 @@ app.post('/login', async (req, res) => {
     await db.read();
     const users = db?.data?.users;
 
-    const idx = (users || []).findIndex(user => user.username === username && user.password === password);
-
-    if (idx !== -1) {
-        const token = jwt.sign({ username: username }, SECRET);
-        users[idx].jwt = token;
-        await db.write();
-
-        // res.cookie('access_token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
-        res.cookie('access_token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
-            .status(200)
-            .json({ message: 'Great success!' });
-
-        console.log('Successful login by:', username);
-    }
-    else {
+    function failedLogin() {
         console.log('Failed login by:', username);
         res.status(401).send({ rtnCode: 1 }); 
+    }
+
+    const idx = (users || []).findIndex(user => user.username === username);
+
+    if (idx !== -1) {
+        bcrypt.compare(password, users[idx].password, async function(err, result) {
+            if (result === true) {
+                const token = jwt.sign({ username: username }, SECRET);
+                users[idx].jwt = token;
+                await db.write();
+
+                // res.cookie('access_token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
+                res.cookie('access_token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
+                    .status(200)
+                    .json({ message: 'Great success!' });
+
+                console.log('Successful login by:', username);
+            }
+            else {
+                failedLogin();
+            }
+        });
+    }
+    else {
+        failedLogin();
     }
 });
 

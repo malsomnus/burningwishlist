@@ -1,0 +1,116 @@
+@keyframes modalanimation {
+    0% {
+        opacity: 0; 
+        transform: translateY(32px);
+    }
+    100% {
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+.uicontext-modal-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    &.visible {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // .modal-container {
+        //     animation:  modalanimation 400ms;
+        // }
+    }
+    &.hidden {
+        display: none;
+    }
+
+    &.dark {
+        >.actual-backdrop {
+            //background-color: black;
+            //opacity: 0.3;
+
+            --icon-color: var(--white);
+        }
+    }
+
+    >.actual-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        opacity: 0.5;
+    }
+
+    >.modal-container {
+        //height: fit-content;
+        //width: fit-content;
+        //background: white;
+        position: absolute; // Required so it shows over the backdrop
+        z-index: 510;
+        
+        //
+    }
+}
+
+.uicontext-modal {
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(48, 49, 51, 1), 0px 2px 15px rgba(48, 49, 51, 1);
+
+}
+
+.uicontext-toasts-container {
+    position: fixed;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min-content;
+    height: min-content;
+    z-index: 600;
+    --toastDuration: 4.9s;
+
+    >.toast {
+        margin-bottom: 8px;
+        animation: toast-animation linear forwards;
+        animation-duration: var(--toastDuration);
+
+        &:last-of-type {
+            margin-bottom: 0px;
+        }
+    }
+
+    @keyframes toast-animation {
+        0% {
+            opacity: 0;
+            transform: translateY(16px);
+            max-height: 48px;
+        }
+
+        5% {
+            opacity: 1;
+            transform: translateY(0px);
+            max-height: 48px;
+        }
+
+        95% {
+            opacity: 1;
+            transform: translateY(0px);
+            max-height: 48px;
+        }
+
+        100% {
+            opacity: 0;
+            transform: translateY(-16px);
+            max-height: 0px;
+        }
+    }
+}

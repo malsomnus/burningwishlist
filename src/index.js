@@ -2,10 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import UiContextProvider from './UiContext';
+import CardDataContextProvider from './CardDataContext';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <App />,
+    <CardDataContextProvider>
+        <UiContextProvider>
+            <App />
+        </UiContextProvider>
+    </CardDataContextProvider>,
     document.getElementById('root')
 );
 
