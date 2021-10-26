@@ -81,7 +81,6 @@ app.get('/carddata', (req, res) => {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.get('/createuser', async (req, res) => {
-    // const { username, password } = req.body;
     const username = 'malsomnus';
     const password = '#passWORD1';
     
@@ -157,18 +156,20 @@ app.get('/getcards', authorization, async (req, res) => {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.post('/addcard', authorization, async (req, res) => {
-
-    // todo: don't add a card that's already on the list
-
     const userObject = await getUserObject(req);
-    userObject.modify(userObject => {
-        userObject.cards.push({
-            name: req.body.name,
-            amount: 0,
-        });
-    });
 
-    res.status(200).send(userObject.cards);
+    if (userObject.cards.find(card => card.name === req.body.name)) {
+        res.status(208).send(userObject.cards);
+    }
+    else {
+        userObject.modify(userObject => {
+            userObject.cards.push({
+                name: req.body.name,
+                amount: 0,
+            });
+        });
+        res.status(200).send(userObject.cards);
+    }
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

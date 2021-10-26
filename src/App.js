@@ -80,10 +80,9 @@ function App(props) {
     }
 
     async function onAddCard(name) {
-        const bloop = await uiContext.showModal({ content: <AddCardModal cardsList={cardsList} /> });
-        console.log(bloop)
-        // const res = await axios.post('/addcard', { name: 'Dark Ritual' });
-        // setCardsList(res.data);
+        const cardName = await uiContext.showModal({ content: <AddCardModal cardsList={cardsList} /> });
+        const res = await axios.post('/addcard', { name: cardName });
+        setCardsList(res.data);
     }
 
     function onPrintList() {

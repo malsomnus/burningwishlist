@@ -12,7 +12,7 @@ export default function AddCardModal(props) {
     const cardDataContext = useCardDataContext();
 
     const matches = cardDataContext.cardNameTrie.get(name).map(match => match.value);
-    const cardNameIsIllegal = cardDataContext.getCard(name).name === undefined;
+    // const cardNameIsIllegal = cardDataContext.getCard(name).name === undefined;
 
     function onClickCard(card) {
         setName(card.faceName || card.name);
@@ -47,7 +47,9 @@ export default function AddCardModal(props) {
 
     function onSubmit(e) {
         e.preventDefault();
-        uiContext.hideModal(name);
+        if (matches.length === 1) {
+            uiContext.hideModal(matches[0].name);
+        }
     }
 
     function onCancel() {
@@ -63,7 +65,7 @@ export default function AddCardModal(props) {
                 <ul className='matches-list'>
                     {listContent}
                 </ul>
-                <button type='submit' disabled={cardNameIsIllegal}>Add card</button>
+                <button type='submit' disabled={matches.length !== 1}>Add card</button>
                 <button type='button' onClick={onCancel}>Cancel</button>
             </form>
         </section>
