@@ -5,7 +5,7 @@ export default function CardPanel(props) {
     const { card } = props;
 
     return (
-        <div className='card-panel'>
+        <div className={`card-panel ${card.amount > 0 ? 'checked' : ''}`}>
             {card.amount > 0 && (
                 <div className='checkmark'>🗸</div>
             )}

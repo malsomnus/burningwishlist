@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useUiContext } from './UiContext';
 import { useCardDataContext } from './CardDataContext';
 import CardPanel from './CardPanel';
@@ -60,7 +60,7 @@ export default function AddCardModal(props) {
 
     return (
         <section className='add-card-modal uicontext-modal'>
-            <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column'}}>
+            <form onSubmit={onSubmit}>
                 <input autoFocus value={name} onChange={e => setName(e.target.value)} />
                 <ul className='matches-list'>
                     {listContent}

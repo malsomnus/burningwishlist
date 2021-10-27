@@ -174,6 +174,24 @@ app.post('/addcard', authorization, async (req, res) => {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+app.post('/addcardtoinventory', authorization, async (req, res) => {
+    const userObject = await getUserObject(req);
+    const cardIndex = userObject.cards.findIndex(card => card.name === req.body.name);
+    const cardObject = userObject.cards.find(card => card.name === req.body.name);
+
+    if (cardObject === -1) {
+        res.status(208).send(userObject.cards);
+    }
+    else {
+        userObject.modify(userObject => {
+            userObject.cards[cardIndex].amount = 1;
+        });
+        res.status(200).send(userObject.cards);
+    }
+});
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 app.get('/ping', (req, res) => {
     return res.send('pong')
 });

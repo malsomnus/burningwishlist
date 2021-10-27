@@ -6,6 +6,7 @@ import { useUiContext } from './UiContext';
 import { useCardDataContext } from './CardDataContext';
 import Login from './Login';
 import AddCardModal from './AddCardModal';
+import ObtainCardModal from './ObtainCardModal';
 import CardPanel from './CardPanel';
 import './App.scss';
 
@@ -89,6 +90,36 @@ function App(props) {
         console.log('print list')
     }
 
+    async function onClickCardPanel(card) {
+        if (card.amount > 0) {
+            return;
+        }
+
+        const confirm = await uiContext.showModal({ content: <ObtainCardModal cardName={card.name} /> });
+        if (confirm) {
+            const res = await axios.post('/addcardtoinventory', { name: card.name });
+            setCardsList(res.data);
+        }
+    }
+
+    async function addCardsManually(cards, addToInventory = false) {
+        const list = cards.split('\n').map(str => str.trim());
+
+        for (let i = 0 ; i < list.length ; i++) {
+            const card = cardDataContext.cardNameTrie.get(list[i])[0].value;
+            const properName = card.faceName || card.name;
+            
+            let res = await axios.post('/addcard', { name: properName });
+
+            if (addToInventory) {
+                res = await axios.post('/addcardtoinventory', { name: properName });
+            }
+
+            setCardsList(res.data);
+        }
+    }
+    window.addCardsManually = addCardsManually;
+
     //
 
     return (
@@ -107,12 +138,19 @@ function App(props) {
 
                     <ul className='cards-list'>
                         {cardsList.map((card, idx) => (
-                            <li key={card.name + idx} className={card.amount > 0 ? 'checked' : ''}>
+                            <li 
+                                key={card.name + idx} 
+                                className={card.amount > 0 ? 'checked' : ''} 
+                                onClick={() => onClickCardPanel(card)}
+                            >
                                 <CardPanel card={{ ...cardDataContext.getCard(card.name), amount: card.amount }} />
                             </li>
                         ))}
                     </ul>
-                    <button className='print-list' onClick={onPrintList}>Print list</button>
+                    
+                    <button className='print-list' onClick={onPrintList}>
+                        Print list
+                    </button>
                 </>
             )}
         </div>

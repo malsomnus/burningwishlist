@@ -1,11 +1,12 @@
 .card-panel {
-    background-color: #fff;
+    background-color: transparent;
     display: flex;
     justify-content: space-between;
     width: 100%;
+    cursor: pointer;
 
     &.checked {
-        // background-color: #dfd;
+        cursor: default;
     }
 
     >.checkmark {
@@ -13,6 +14,7 @@
         font-weight: bold;
         margin-right: 4px;
         transform: translateY(1px);
+        color: green;
     }
 
     >.card-name {
