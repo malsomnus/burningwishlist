@@ -8,6 +8,7 @@ function throwUnsetContextError(f) {
 }
 const contextDefault = { 
     cardData: throwUnsetContextError('cardData'),
+    cardsList: throwUnsetContextError('cardsList'),
     cardNameTrie: throwUnsetContextError('cardNameTrie'),
     setCardData: throwUnsetContextError('setCardData'),
 };
@@ -17,12 +18,14 @@ export const Context = createContext(contextDefault);
 export default function UiContext(props) {
     const { children } = props;
     const [cardData, setCardData] = useState({});
-    const [cardNameTrie, setCardNameTrie] = useState({});
+    const [cardsList, setCardsList] = useState([]);
+    const [cardNameTrie, setCardNameTrie] = useState({ get: () => [] });
 
     //
 
     const contextValue = { 
         cardData: cardData,
+        cardsList: cardsList,
         cardNameTrie: cardNameTrie,
         setCardData: cardData => {
             setCardData(cardData);
@@ -30,6 +33,13 @@ export default function UiContext(props) {
             trie.addFromObject(cardData);
             setCardNameTrie(trie);
             window.trie=trie
+        },
+        setCardsList: cardsList => {
+            const map = {};
+            cardsList.forEach(card => {
+                map[card.name] = card.amount;
+            });
+            setCardsList(map);
         },
         getCard: name => cardData[name] || {},
     };

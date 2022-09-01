@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useUiContext } from './UiContext';
 import { useCardDataContext } from './CardDataContext';
-import CardPanel from './CardPanel';
+import CardNamePanel from './CardNamePanel';
 import './AddCardModal.scss';
 
 export default function AddCardModal(props) {
@@ -37,7 +37,7 @@ export default function AddCardModal(props) {
         listContent = (
             matches.length <= 15 && matches.map(card => (
                 <li onClick={() => onClickCard(cardDataContext.getCard(card.faceName || card.name))}>
-                    <CardPanel card={{ ...cardDataContext.getCard(card.faceName || card.name), amount: card.amount }} />
+                    <CardNamePanel card={{ ...cardDataContext.getCard(card.faceName || card.name), amount: card.amount }} />
                 </li>
             ))
         );
@@ -53,7 +53,7 @@ export default function AddCardModal(props) {
     }
 
     function onCancel() {
-        uiContext.hideModal();
+        uiContext.hideModal(null);
     }
 
     //

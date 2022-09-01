@@ -7,8 +7,29 @@ import { useCardDataContext } from './CardDataContext';
 import Login from './Login';
 import AddCardModal from './AddCardModal';
 import ObtainCardModal from './ObtainCardModal';
-import CardPanel from './CardPanel';
+import CardNamePanel from './CardNamePanel';
+import Playground from './playground/playground';
+import Main from './Main.js';
 import './App.scss';
+
+// Mana font taken from https://github.com/gbartholomeu/mtg-minimalist-proxies
+import './manafont/mana.scss';
+
+/*
+
+To do:
+- Add card text to ObtainCardModal
+- Sort list by obtained > color > alphabetically
+- Make obtained cards collapsible
+- Print list
+- Show in AddCardModal if a given card is already obtained
+- Server side code to prevent adding a card that doesn't exist
+- Cache
+- Host this somewhere
+
+
+
+*/
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -16,11 +37,11 @@ window.logout = () => axios.get('/logout');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-async function fetchCardData(cb) {
-    // if (process.env.NODE_ENV === 'development') {
-    //     return require('./data/lessmtg.json');
-    // }
-    // else {
+async function fetchCardData() {
+    if (process.env.NODE_ENV === 'development') {
+        return require('./lessmtg.json');
+    }
+    else {
         try {
             const res = await axios.get('/carddata');
             return res.data;
@@ -28,16 +49,17 @@ async function fetchCardData(cb) {
         catch (e) {
             return 'Error fetching card data';
         };
-    // }
+    }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function App(props) {
+export default function App(props) {
     const [cardData, setCardData] = useState({});
     const [cardsTrie, setCardsTrie] = useState({});
     const [showLogin, setShowLogin] = useState(false);
-    const [cardsList, setCardsList] = useState([]);
+
+    const [playground, setPlayground] = useState(false);
 
     const uiContext = useUiContext();
     const cardDataContext = useCardDataContext();
@@ -45,20 +67,26 @@ function App(props) {
     //
 
     async function getCards() {
-        try {
-            const res = await axios.get('/getcards');
-            setCardsList(res.data);
+        if (process.env.NODE_ENV === 'development') {
+            const db = require('./server/db.json');
+            cardDataContext.setCardsList(db.users[0].cards);
         }
-        catch (e) {
-            console.log(e)
-            if (e?.response?.status === 403) {
-                console.error('Error: not logged in');
-                setShowLogin(true);
+        else {
+            try {
+                const res = await axios.get('/getcards');
+                cardDataContext.setCardsList(res.data);
             }
-            else {
-                console.error('Unexpected error');
+            catch (e) {
+                console.log(e)
+                if (e?.response?.status === 403) {
+                    console.error('Error: not logged in');
+                    setShowLogin(true);
+                }
+                else {
+                    console.error('Unexpected error', e);
+                }
             }
-        };
+        }
     }
 
     //
@@ -81,16 +109,18 @@ function App(props) {
     }
 
     async function onAddCard(name) {
-        const cardName = await uiContext.showModal({ content: <AddCardModal cardsList={cardsList} /> });
-        const res = await axios.post('/addcard', { name: cardName });
-        setCardsList(res.data);
+        const cardName = await uiContext.showModal({ content: <AddCardModal cardsList={cardDataContext.cardsList} /> });
+        if (cardName) {
+            const res = await axios.post('/addcard', { name: cardName });
+            cardDataContext.setCardsList(res.data);
+        }
     }
 
     function onPrintList() {
         console.log('print list')
     }
 
-    async function onClickCardPanel(card) {
+    async function onClickCardNamePanel(card) {
         if (card.amount > 0) {
             return;
         }
@@ -98,7 +128,7 @@ function App(props) {
         const confirm = await uiContext.showModal({ content: <ObtainCardModal cardName={card.name} /> });
         if (confirm) {
             const res = await axios.post('/addcardtoinventory', { name: card.name });
-            setCardsList(res.data);
+            cardDataContext.setCardsList(res.data);
         }
     }
 
@@ -115,35 +145,30 @@ function App(props) {
                 res = await axios.post('/addcardtoinventory', { name: properName });
             }
 
-            setCardsList(res.data);
+            cardDataContext.setCardsList(res.data);
         }
     }
     window.addCardsManually = addCardsManually;
 
     //
 
-    return (
-        <div className='app'>
-            <Helmet>
-                <title>Burning Wishlist</title>
-                <link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.min.css" rel="stylesheet" type="text/css" />
-            </Helmet>
-            
-            {showLogin ? (
-                <Login onSuccess={onSuccessfulLogin} />         
-            ) : (
-                <>
+    if (playground) {
+        return <Playground cardData={cardData} onClose={() => setPlayground(false)} />
+    }
+
+    if (false) {
+        return <>
                     <button className='add-card' onClick={onAddCard}>Add</button>
                     {/*<button onClick={() => axios.get('/logout')}>Log out</button>*/}
 
                     <ul className='cards-list'>
-                        {cardsList.map((card, idx) => (
+                        {cardDataContext.cardsList.map((card, idx) => (
                             <li 
                                 key={card.name + idx} 
                                 className={card.amount > 0 ? 'checked' : ''} 
-                                onClick={() => onClickCardPanel(card)}
+                                onClick={() => onClickCardNamePanel(card)}
                             >
-                                <CardPanel card={{ ...cardDataContext.getCard(card.name), amount: card.amount }} />
+                                <CardNamePanel card={{ ...cardDataContext.getCard(card.name), amount: card.amount }} />
                             </li>
                         ))}
                     </ul>
@@ -151,10 +176,22 @@ function App(props) {
                     <button className='print-list' onClick={onPrintList}>
                         Print list
                     </button>
+                    <button className='add-card' onClick={() => setPlayground(true)}>Playground</button>
                 </>
+    }
+
+    return (
+        <div className='app'>
+            <Helmet>
+                <title>Burning Wishlist</title>
+            </Helmet>
+            
+            {showLogin ? (
+                <Login onSuccess={onSuccessfulLogin} />         
+            ) : (
+                <Main />
+                
             )}
         </div>
     );
 }
-
-export default App;

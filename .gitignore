@@ -12,8 +12,12 @@
 /data
 /build
 /src/server/db.json
+/src/lessmtg.json
 secret.js
 secret.json
+digital_ocean_ssh_key.txt
+digital_ocean_ssh_key.txt.pub
+digital_ocean_github_access_token.txt
 
 # misc
 .DS_Store
