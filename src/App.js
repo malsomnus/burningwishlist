@@ -37,17 +37,6 @@ window.logout = () => axios.get('/logout');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-console.log('addEventListener');
-document.addEventListener('keydown', e => {
-    // console.log(e.altKey, e.ctrlKey, e.code)
-    if (e.ctrlKey && e.altKey && e.code === 'Enter') {
-        e.stopPropagation();
-        console.log('ding')
-    }
-}); 
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 async function fetchCardData() {
     if (process.env.NODE_ENV === 'development') {
         return require('./lessmtg.json');

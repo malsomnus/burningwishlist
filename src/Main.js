@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useCardDataContext } from './CardDataContext';
 import { ManaCost, ManaSymbol } from './manacost.js';
 import CardNamePanel from './CardNamePanel';
@@ -73,13 +73,17 @@ export default function Main(props) {
 
     const cardDataContext = useCardDataContext();
     const uiContext = useUiContext();
+    const inputRef = useRef(null);
 
     const matches = cardDataContext.cardNameTrie.get(name).map(match => match.value);
 
     useEffect(() => {
         uiContext.addShortcut({ code: 'Backspace', ctrl: true, alt: true, cb: () => {
             setViewSingleCard(null);
-        }})
+        }});
+        uiContext.addShortcut({ code: 'KeyF', ctrl: true, alt: true, cb: () => {
+            inputRef.current.focus();
+        }});
     }, []);
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -182,7 +186,7 @@ export default function Main(props) {
                 </>
             ) : (
                 <form onSubmit={onEnter}>
-                    <input className='card-name' autoFocus value={name} onChange={e => setName(e.target.value)} />
+                    <input className='card-name' autoFocus ref={inputRef} value={name} onChange={e => setName(e.target.value)} />
                     {content}
                 </form>
             )}
