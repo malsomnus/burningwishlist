@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useCardDataContext } from './CardDataContext';
 import { ManaCost, ManaSymbol } from './manacost.js';
 import CardNamePanel from './CardNamePanel';
+import { useUiContext } from './UiContext';
 import './Main.scss';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -71,13 +72,20 @@ export default function Main(props) {
     const [viewSingleCard, setViewSingleCard] = useState(null);
 
     const cardDataContext = useCardDataContext();
+    const uiContext = useUiContext();
 
     const matches = cardDataContext.cardNameTrie.get(name).map(match => match.value);
+
+    useEffect(() => {
+        uiContext.addShortcut({ code: 'Backspace', ctrl: true, alt: true, cb: () => {
+            setViewSingleCard(null);
+        }})
+    }, []);
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     const getCardName = card => cardDataContext.getCard(card.faceName || card.name);
-    
+
     const onEnter = e => {
         e.preventDefault();
         if (matches.length === 1) {
@@ -97,7 +105,7 @@ export default function Main(props) {
             </div>
         );
     }
-    else if (matches.length > 15) {
+    else if (matches.length > 30) {
         content = (
             <div>
                 Be more specific!

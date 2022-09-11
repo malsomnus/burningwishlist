@@ -27,6 +27,8 @@ const contextDefault = {
     stopSpinner: throwUnsetContextError('stopSpinner'),
     showToast: throwUnsetContextError('showToast'),
     hideToast: throwUnsetContextError('hideToast'),
+
+    addShortcut: throwUnsetContextError('setShortcut'),
 };
 
 export const Context = createContext(contextDefault);
@@ -39,6 +41,7 @@ const initialState = {
     modals: [],
     toasts: [],
     toastTimers: {},
+    shortcuts: [],
 };
 
 function reducer(state, action) {
@@ -118,6 +121,15 @@ function reducer(state, action) {
         case 'setToastTimer': {
             return state;
         }
+
+        case 'addShortcut': {
+            const { shortcut } = action;
+            return {
+                ...state,
+                shortcuts: state.shortcuts.concat(shortcut),
+            };
+        }
+
         default: {
             throw new Error();
         }
@@ -158,6 +170,25 @@ export default function UiContext(props) {
             });
         };
     }, []);
+
+    useEffect(() => {
+        const listener = e => {
+            // console.log(e.altKey, e.ctrlKey, e.code)
+            // console.log(state.shortcuts)
+            state.shortcuts.forEach(({ code, ctrl, alt, cb }) => {
+                if (code === e.code && (!ctrl || e.ctrlKey) && (!alt || e.altKey)) {
+                    e.stopPropagation();    // Might want to make this optional 🤔
+                    (cb || (() => {}))();
+                }
+            })
+        };
+        document.addEventListener('keydown', listener);
+    
+        return () => {
+            document.removeEventListener('keydown', listener);
+        };
+    }, [state]);
+
 
     //
 
@@ -211,6 +242,8 @@ export default function UiContext(props) {
 
         showToast: showToast,
         hideToast: id => safeDispatch({ type: 'hideToast', id: id}),
+
+        addShortcut: shortcut => safeDispatch({ type: 'addShortcut', shortcut: shortcut }),
     };
 
     //

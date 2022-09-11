@@ -4,40 +4,44 @@
     background: #ddd;
     padding: 12px;
 
-    input.card-name {
-        width: 100%;
-    }
-
-    ul.matches-list {
-        background-color: #fff;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1;
-
-        >li {
-            list-style-type: none;
+    form {
+        input.card-name {
             width: 100%;
-            padding: 4px 40px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
+        }
 
-            &:hover {
-                background-color: #eee;
+        ul.matches-list {
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            overflow-y: scroll;
+            max-height: 90vh;
 
-                >* {
+            >li {
+                list-style-type: none;
+                width: 100%;
+                padding: 4px 40px;
+                border-bottom: 1px solid #ddd;
+                cursor: pointer;
+
+                &:hover {
                     background-color: #eee;
-                }
-            }
 
-            &:last-child {
-                border-bottom: none;
+                    >* {
+                        background-color: #eee;
+                    }
+                }
+
+                &:last-child {
+                    border-bottom: none;
+                }
             }
         }
     }
-
+    
     .row {
         display: flex;
         justify-content: space-between;
