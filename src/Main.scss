@@ -5,6 +5,10 @@
     padding: 12px;
 
     form {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
         input.card-name {
             width: 100%;
         }
@@ -18,7 +22,7 @@
             align-items: center;
             flex: 1;
             overflow-y: scroll;
-            max-height: 90vh;
+            // max-height: 90vh;
 
             >li {
                 list-style-type: none;
@@ -36,56 +40,10 @@
                 }
 
                 &:last-child {
-                    border-bottom: none;
+                    // border-bottom: none;
                 }
             }
         }
     }
-    
-    .row {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 0px;
-    }
 
-    .single-card {
-        margin: 8px 4px 4px;
-
-        >* {
-            padding-left: 12px;
-            padding-right: 12px;
-            background-color: #fff;
-        }
-
-        >.title {
-            margin-bottom: 1px;
-
-            .mana-cost {
-                >* {
-                    margin-left: 2px;
-                }
-            }
-        }
-
-        >.type {
-            margin-bottom: 1px;
-
-        }
-
-        >.text {
-            padding: 8px 12px;
-
-            .ms {
-                margin-right: 2px;
-            }
-
-            p {
-                margin: 4px 0px;
-            }
-        }
-
-        button {
-            // border: 1px outset;
-        }
-    }
 }

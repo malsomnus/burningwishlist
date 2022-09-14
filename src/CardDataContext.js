@@ -42,6 +42,8 @@ export default function UiContext(props) {
             setCardsList(map);
         },
         getCard: name => cardData[name] || {},
+        cardIsInList: name => cardsList[name] !== undefined,
+        cardIsInInventory: name => cardsList[name] > 0,
     };
 
     return (

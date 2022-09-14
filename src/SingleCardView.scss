@@ -1,0 +1,62 @@
+.single-card {
+    .single-card-top {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            padding: 4px 16px;
+            cursor: pointer;
+        }
+
+        .got-it {
+            margin-right: 4px;
+            
+            .v {
+                color: green;
+            }
+        }
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0px;
+    }
+
+    .card-info {
+        margin: 8px 4px 4px;
+
+        >* {
+            padding-left: 12px;
+            padding-right: 12px;
+            background-color: #fff;
+        }
+
+        >.title {
+            margin-bottom: 1px;
+
+            .mana-cost {
+                >* {
+                    margin-left: 2px;
+                }
+            }
+        }
+
+        >.type {
+            margin-bottom: 1px;
+
+        }
+
+        >.text {
+            padding: 8px 12px;
+
+            .ms {
+                margin-right: 2px;
+            }
+
+            p {
+                margin: 4px 0px;
+            }
+        }
+    }
+}

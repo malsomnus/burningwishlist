@@ -108,28 +108,18 @@ export default function App(props) {
         setShowLogin(false);
     }
 
-    async function onAddCard(name) {
-        const cardName = await uiContext.showModal({ content: <AddCardModal cardsList={cardDataContext.cardsList} /> });
-        if (cardName) {
-            const res = await axios.post('/addcard', { name: cardName });
-            cardDataContext.setCardsList(res.data);
-        }
+    async function onAddCardToList(name) {
+        const res = await axios.post('/addcard', { name: name });
+        cardDataContext.setCardsList(res.data);
+    }
+
+    async function onAddCardToInventory(name) {
+        const res = await axios.post('/addcardtoinventory', { name: name });
+        cardDataContext.setCardsList(res.data);
     }
 
     function onPrintList() {
         console.log('print list')
-    }
-
-    async function onClickCardNamePanel(card) {
-        if (card.amount > 0) {
-            return;
-        }
-
-        const confirm = await uiContext.showModal({ content: <ObtainCardModal cardName={card.name} /> });
-        if (confirm) {
-            const res = await axios.post('/addcardtoinventory', { name: card.name });
-            cardDataContext.setCardsList(res.data);
-        }
     }
 
     async function addCardsManually(cards, addToInventory = false) {
@@ -156,30 +146,6 @@ export default function App(props) {
         return <Playground cardData={cardData} onClose={() => setPlayground(false)} />
     }
 
-    if (false) {
-        return <>
-                    <button className='add-card' onClick={onAddCard}>Add</button>
-                    {/*<button onClick={() => axios.get('/logout')}>Log out</button>*/}
-
-                    <ul className='cards-list'>
-                        {cardDataContext.cardsList.map((card, idx) => (
-                            <li 
-                                key={card.name + idx} 
-                                className={card.amount > 0 ? 'checked' : ''} 
-                                onClick={() => onClickCardNamePanel(card)}
-                            >
-                                <CardNamePanel card={{ ...cardDataContext.getCard(card.name), amount: card.amount }} />
-                            </li>
-                        ))}
-                    </ul>
-                    
-                    <button className='print-list' onClick={onPrintList}>
-                        Print list
-                    </button>
-                    <button className='add-card' onClick={() => setPlayground(true)}>Playground</button>
-                </>
-    }
-
     return (
         <div className='app'>
             <Helmet>
@@ -189,7 +155,10 @@ export default function App(props) {
             {showLogin ? (
                 <Login onSuccess={onSuccessfulLogin} />         
             ) : (
-                <Main />
+                <Main 
+                    onAddCardToList={onAddCardToList}
+                    onAddCardToInventory={onAddCardToInventory}
+                />
                 
             )}
         </div>

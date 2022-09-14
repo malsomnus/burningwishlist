@@ -1,79 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 import { useCardDataContext } from './CardDataContext';
-import { ManaCost, ManaSymbol } from './manacost.js';
 import CardNamePanel from './CardNamePanel';
 import { useUiContext } from './UiContext';
+import SingleCardView from './SingleCardView';
 import './Main.scss';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function createTextParagraphs(card) {
-    // Find symbols in the text and split it all neatly
-    const paragraphs = (card.text || '').split('\n');
-    return paragraphs.map((paragraph, idx) => {
-        const parts = paragraph.match(/([^{}]+)|(\{.+?\})/g);
-        return (
-            <p key={idx}>
-                {parts.map((part, idx) => {
-                    if (part[0] === '{') {
-                        return <ManaCost s={part} key={idx} />;
-                    }
-                    else {
-                        return part;
-                    }
-                })}
-            </p>
-        );
-    });
-}
-
-function SingleCard({ card, actions }) {
-    if (!card) return null;
-
-    return (
-        <section className='single-card'>
-            <div className='row title'>
-                {card.faceName || card.name}
-                <div className='mana-cost'>
-                    <ManaCost s={card.manaCost} />
-                </div>
-            </div>
-
-            <div className='row type'>
-                {card.type}
-            </div>
-
-            <div className='text'>
-                {createTextParagraphs(card)}
-            </div>
-
-            {(card.power && card.toughness) && (
-                <div className='row' style={{ justifyContent: 'flex-end' }}>
-                    {`${card.power} / ${card.toughness}`}
-                </div>
-            )}
-
-            {card.otherFaceName && (
-                <button type='button' onClick={actions?.viewOtherFace}>
-                    {`View other face: ${card.otherFaceName}`}
-                </button>
-            )}
-
-
-        </section>
-    );
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 export default function Main(props) {
-    const { cardsList } = props;
+    const { onAddCardToList, onAddCardToInventory } = props;
     const [name, setName] = useState('');
     const [viewSingleCard, setViewSingleCard] = useState(null);
 
     const cardDataContext = useCardDataContext();
     const uiContext = useUiContext();
     const inputRef = useRef(null);
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     const matches = cardDataContext.cardNameTrie.get(name).map(match => match.value);
 
@@ -99,8 +42,47 @@ export default function Main(props) {
 
     let content;
 
-    if (name === '') {
-        content = null;
+    if (Object.keys(cardDataContext.cardData || {}).length === 0) {
+        content = (
+            <div>Loading...</div>
+        );
+    }
+    else if (name === '') {
+        // For this case I can add color filters maybe
+
+        const missingCards = [];
+        const acquiredCards = [];
+
+        Object.keys(cardDataContext.cardsList).forEach(name => {
+            const amount = cardDataContext.cardsList[name];
+            const card = cardDataContext.cardData[name];
+            if (amount > 0) {
+                acquiredCards.push(card);
+            }
+            else {
+                missingCards.push(card);
+            }
+        })
+
+        content = (
+            <>
+                <ul className='matches-list'>
+                    {missingCards.map(card => (
+                        <li onClick={() => setViewSingleCard(card)} key={card.name}>
+                            <CardNamePanel key={card.name} card={card} />
+                        </li>
+                    ))}
+                </ul>
+                {/*<div style={{ height: '8px' }}></div>
+                <ul className='matches-list'>
+                    {acquiredCards.map(card => (
+                        <li onClick={() => setViewSingleCard(getCardName(card))} key={card.name}>
+                            <CardNamePanel key={card.name} card={{ ...card, amount: 1 }} />
+                        </li>
+                    ))}
+                </ul>*/}
+             </>
+        );
     }
     else if (matches.length === 0) {
         content = (
@@ -147,25 +129,6 @@ export default function Main(props) {
                 </ul>
             </>
         );
-
-        // so here i want to split to two lists:
-        // cards that are on the list - show with or without a checkmark
-        // cards that aren't on the list
-
-/*
-
-        listContent = (
-            matches.length <= 15 && matches.map(card => (
-                <li onClick={() => onClickCard(cardDataContext.getCard(card.faceName || card.name))} key={card.name}>
-                    <CardNamePanel 
-                        card={{ 
-                            ...cardDataContext.getCard(card.faceName || card.name), 
-                            amount: cardDataContext.cardsList.filter(x => x.name === card.name)[0]?.amount, 
-                        }} 
-                    />
-                </li>
-            ))
-        );*/
     }
 
     //
@@ -174,13 +137,14 @@ export default function Main(props) {
         <section className='app-main'>
             {viewSingleCard ? (
                 <>
-                    <button type='button' onClick={() => setViewSingleCard(null)}>
-                        {'<'}
-                    </button>
-                    <SingleCard 
+                    
+                    <SingleCardView 
                         card={viewSingleCard} 
                         actions={{
-                            viewOtherFace: () => setViewSingleCard(cardDataContext.getCard(viewSingleCard.otherFaceName))
+                            goBack: () => setViewSingleCard(null),
+                            viewOtherFace: () => setViewSingleCard(cardDataContext.getCard(viewSingleCard.otherFaceName)),
+                            addCardToList: () => onAddCardToList(viewSingleCard.name),
+                            addCardToInventory: () => onAddCardToInventory(viewSingleCard.name),
                         }}
                     />
                 </>
