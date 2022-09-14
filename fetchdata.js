@@ -29,6 +29,10 @@ const files = [
     },
 ];
 
+if (!fs.existsSync('./data')) {
+    fs.mkdirSync('./data');
+}
+
 files.forEach(file => {
     download(file.url, file.dst).then(() => {
         console.log(`${file.dst} downloaded successfully!`);
