@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/data
+/data/mtg.json
 /build
 /src/server/db.json
 /src/lessmtg.json
