@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import bcrypt from 'bcrypt';
-import SECRET from '../../secret.js';
+import SECRET from './secret.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -30,7 +30,7 @@ function authorization(req, res, next) {
     }
 }
 
-app.use(express.static(path.join(__dirname, '..', '..', 'build')));
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -74,13 +74,19 @@ async function getUserObject(req) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.get('/carddata', (req, res) => {
-    console.log('Sending:', path.join(__dirname, '..', '..', 'data', 'lessmtg.json'));
-    res.sendFile(path.join(__dirname, '..', '..', 'data', 'lessmtg.json'));
+    console.log('Sending:', path.join(__dirname, 'data', 'lessmtg.json'));
+    res.sendFile(path.join(__dirname, 'data', 'lessmtg.json'));
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.get('/createuser', async (req, res) => {
+
+    res.status(500).send('Woah there, remember to actually update this thing to work with a proper not-hardcoded username and password');
+
+
+
+
     const username = 'malsomnus';
     const password = '#passWORD1';
     
