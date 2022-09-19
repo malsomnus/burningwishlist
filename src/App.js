@@ -36,26 +36,7 @@ To do:
 window.logout = () => axios.get('/logout');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-async function fetchCardData() {
-    if (process.env.NODE_ENV === 'development') {
-        return require('./lessmtg.json');
-    }
-    else {
-        try {
-            const res = await axios.get('/carddata');
-            return res.data;
-        }
-        catch (e) {
-            return 'Error fetching card data';
-        };
-    }
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 export default function App(props) {
-    const [cardData, setCardData] = useState({});
     const [cardsTrie, setCardsTrie] = useState({});
     const [showLogin, setShowLogin] = useState(false);
 
@@ -90,14 +71,6 @@ export default function App(props) {
     }
 
     //
-
-    useEffect(() => {
-        (async () => {
-            const cardData = await fetchCardData();
-            window.cards = cardData;
-            cardDataContext.setCardData(cardData);
-        })();
-    }, []);
 
     useEffect(getCards, []);
 
@@ -143,7 +116,7 @@ export default function App(props) {
     //
 
     if (playground) {
-        return <Playground cardData={cardData} onClose={() => setPlayground(false)} />
+        return <Playground cardData={cardDataContext.cardData} onClose={() => setPlayground(false)} />
     }
 
     return (

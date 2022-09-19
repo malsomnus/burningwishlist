@@ -73,13 +73,6 @@ async function getUserObject(req) {
 // });
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-app.get('/carddata', (req, res) => {
-    console.log('Sending:', path.join(__dirname, 'data', 'lessmtg.json'));
-    res.sendFile(path.join(__dirname, 'data', 'lessmtg.json'));
-});
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 app.get('/createuser', async (req, res) => {
 
     res.status(500).send('Woah there, remember to actually update this thing to work with a proper not-hardcoded username and password');

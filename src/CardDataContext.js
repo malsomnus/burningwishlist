@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import TrieSearch from 'trie-search';
+import cardData from './lessmtg.json';
 
 function throwUnsetContextError(f) {
     return () => {
@@ -10,14 +11,12 @@ const contextDefault = {
     cardData: throwUnsetContextError('cardData'),
     cardsList: throwUnsetContextError('cardsList'),
     cardNameTrie: throwUnsetContextError('cardNameTrie'),
-    setCardData: throwUnsetContextError('setCardData'),
 };
 
 export const Context = createContext(contextDefault);
 
 export default function UiContext(props) {
     const { children } = props;
-    const [cardData, setCardData] = useState({});
     const [cardsList, setCardsList] = useState([]);
     const [cardNameTrie, setCardNameTrie] = useState({ get: () => [] });
 
@@ -27,13 +26,6 @@ export default function UiContext(props) {
         cardData: cardData,
         cardsList: cardsList,
         cardNameTrie: cardNameTrie,
-        setCardData: cardData => {
-            setCardData(cardData);
-            const trie = new TrieSearch();
-            trie.addFromObject(cardData);
-            setCardNameTrie(trie);
-            window.trie=trie
-        },
         setCardsList: cardsList => {
             const map = {};
             cardsList.forEach(card => {
