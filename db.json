@@ -1,0 +1,1195 @@
+{
+  "users": [
+    {
+      "username": "malsomnus",
+      "password": "$2b$10$NM8InSZffCAJiijfvoCBLON6y9XURFcaM3BQEEowo58CkHURrxPXG",
+      "cards": [
+        {
+          "name": "Whip of Erebos",
+          "amount": 1
+        },
+        {
+          "name": "Erebos, Bleak-Hearted",
+          "amount": 1
+        },
+        {
+          "name": "Replenish",
+          "amount": 1
+        },
+        {
+          "name": "Reversal of Fortune",
+          "amount": 1
+        },
+        {
+          "name": "Summoning Station",
+          "amount": 1
+        },
+        {
+          "name": "Semblance Anvil",
+          "amount": 1
+        },
+        {
+          "name": "Cloud Key",
+          "amount": 1
+        },
+        {
+          "name": "Clearwater Pathway",
+          "amount": 1
+        },
+        {
+          "name": "Savai Triome",
+          "amount": 1
+        },
+        {
+          "name": "Song of the Worldsoul",
+          "amount": 1
+        },
+        {
+          "name": "Ancestral Vision",
+          "amount": 1
+        },
+        {
+          "name": "Coastal Piracy",
+          "amount": 1
+        },
+        {
+          "name": "Mistblade Shinobi",
+          "amount": 1
+        },
+        {
+          "name": "Thalakos Seer",
+          "amount": 1
+        },
+        {
+          "name": "Alela, Artful Provocateur",
+          "amount": 1
+        },
+        {
+          "name": "Athreos, Shroud-Veiled",
+          "amount": 1
+        },
+        {
+          "name": "Cauldron Haze",
+          "amount": 1
+        },
+        {
+          "name": "Gyruda, Doom of Depths",
+          "amount": 1
+        },
+        {
+          "name": "Dramatic Entrance",
+          "amount": 1
+        },
+        {
+          "name": "Unbound Flourishing",
+          "amount": 1
+        },
+        {
+          "name": "Mana Reflection",
+          "amount": 1
+        },
+        {
+          "name": "Living Lands",
+          "amount": 1
+        },
+        {
+          "name": "Nature's Revolt",
+          "amount": 1
+        },
+        {
+          "name": "Master Warcraft",
+          "amount": 1
+        },
+        {
+          "name": "Kozilek, Butcher of Truth",
+          "amount": 1
+        },
+        {
+          "name": "Akroma's Memorial",
+          "amount": 1
+        },
+        {
+          "name": "Sword of Dungeons & Dragons",
+          "amount": 1
+        },
+        {
+          "name": "Kodama of the East Tree",
+          "amount": 1
+        },
+        {
+          "name": "Curfew",
+          "amount": 1
+        },
+        {
+          "name": "Dramatic Reversal",
+          "amount": 1
+        },
+        {
+          "name": "Hammer of Nazahn",
+          "amount": 1
+        },
+        {
+          "name": "Rootweaver Druid",
+          "amount": 1
+        },
+        {
+          "name": "Spike Cannibal",
+          "amount": 1
+        },
+        {
+          "name": "Surrakar Spellblade",
+          "amount": 1
+        },
+        {
+          "name": "Thief of Blood",
+          "amount": 1
+        },
+        {
+          "name": "Equal Treatment",
+          "amount": 1
+        },
+        {
+          "name": "Turbulent Dreams",
+          "amount": 1
+        },
+        {
+          "name": "Flame Fusillade",
+          "amount": 1
+        },
+        {
+          "name": "Psychic Spiral",
+          "amount": 1
+        },
+        {
+          "name": "Fleshwrither",
+          "amount": 1
+        },
+        {
+          "name": "One with Nature",
+          "amount": 1
+        },
+        {
+          "name": "Web of Inertia",
+          "amount": 1
+        },
+        {
+          "name": "Traumatize",
+          "amount": 1
+        },
+        {
+          "name": "Walking Archive",
+          "amount": 1
+        },
+        {
+          "name": "Reyav, Master Smith",
+          "amount": 1
+        },
+        {
+          "name": "Jorn, God of Winter",
+          "amount": 1
+        },
+        {
+          "name": "Energy Tap",
+          "amount": 1
+        },
+        {
+          "name": "Lotus Cobra",
+          "amount": 1
+        },
+        {
+          "name": "Blade of the Bloodchief",
+          "amount": 1
+        },
+        {
+          "name": "Immersturm Predator",
+          "amount": 1
+        },
+        {
+          "name": "Dredge the Mire",
+          "amount": 1
+        },
+        {
+          "name": "Boneyard Mycodrax",
+          "amount": 1
+        },
+        {
+          "name": "Daring Fiendbonder",
+          "amount": 1
+        },
+        {
+          "name": "Mindleecher",
+          "amount": 1
+        },
+        {
+          "name": "Frontier Warmonger",
+          "amount": 1
+        },
+        {
+          "name": "Sawtusk Demolisher",
+          "amount": 1
+        },
+        {
+          "name": "Slippery Bogbonder",
+          "amount": 1
+        },
+        {
+          "name": "Jirina Kudro",
+          "amount": 1
+        },
+        {
+          "name": "Luminous Broodmoth",
+          "amount": 1
+        },
+        {
+          "name": "Otrimi, the Ever-Playful",
+          "amount": 1
+        },
+        {
+          "name": "Talisman of Progress",
+          "amount": 1
+        },
+        {
+          "name": "Words of Wilding",
+          "amount": 1
+        },
+        {
+          "name": "Words of Wind",
+          "amount": 1
+        },
+        {
+          "name": "Leyline Tyrant",
+          "amount": 1
+        },
+        {
+          "name": "Burning-Rune Demon",
+          "amount": 1
+        },
+        {
+          "name": "Valkyrie Harbinger",
+          "amount": 1
+        },
+        {
+          "name": "Warchanter Skald",
+          "amount": 1
+        },
+        {
+          "name": "Starnheim Aspirant",
+          "amount": 1
+        },
+        {
+          "name": "Rampage of the Valkyries",
+          "amount": 1
+        },
+        {
+          "name": "Armed and Armored",
+          "amount": 1
+        },
+        {
+          "name": "Absorb Identity",
+          "amount": 1
+        },
+        {
+          "name": "Duneblast",
+          "amount": 1
+        },
+        {
+          "name": "Fatal Frenzy",
+          "amount": 1
+        },
+        {
+          "name": "Reiterate",
+          "amount": 1
+        },
+        {
+          "name": "Ertai's Meddling",
+          "amount": 1
+        },
+        {
+          "name": "Angel's Trumpet",
+          "amount": 1
+        },
+        {
+          "name": "Death or Glory",
+          "amount": 1
+        },
+        {
+          "name": "Leave No Trace",
+          "amount": 1
+        },
+        {
+          "name": "Strands of Night",
+          "amount": 1
+        },
+        {
+          "name": "Mirrorpool",
+          "amount": 1
+        },
+        {
+          "name": "Three Visits",
+          "amount": 1
+        },
+        {
+          "name": "Decimator Web",
+          "amount": 1
+        },
+        {
+          "name": "Avatar of Slaughter",
+          "amount": 1
+        },
+        {
+          "name": "Parting Thoughts",
+          "amount": 1
+        },
+        {
+          "name": "Hedron Matrix",
+          "amount": 1
+        },
+        {
+          "name": "Kokusho, the Evening Star",
+          "amount": 1
+        },
+        {
+          "name": "Brokkos, Apex of Forever",
+          "amount": 1
+        },
+        {
+          "name": "Eye of Ugin",
+          "amount": 1
+        },
+        {
+          "name": "Ring of Three Wishes",
+          "amount": 1
+        },
+        {
+          "name": "Sakashima of a Thousand Faces",
+          "amount": 1
+        },
+        {
+          "name": "Academy at Tolaria West",
+          "amount": 1
+        },
+        {
+          "name": "Crackling Doom",
+          "amount": 1
+        },
+        {
+          "name": "Field of the Dead",
+          "amount": 1
+        },
+        {
+          "name": "Blustersquall",
+          "amount": 1
+        },
+        {
+          "name": "Branching Evolution",
+          "amount": 1
+        },
+        {
+          "name": "Garruk, Primal Hunter",
+          "amount": 1
+        },
+        {
+          "name": "Imps' Taunt",
+          "amount": 1
+        },
+        {
+          "name": "Grafted Exoskeleton",
+          "amount": 1
+        },
+        {
+          "name": "Life and Limb",
+          "amount": 1
+        },
+        {
+          "name": "Dream Devourer",
+          "amount": 1
+        },
+        {
+          "name": "Urborg, Tomb of Yawgmoth",
+          "amount": 1
+        },
+        {
+          "name": "Avatar of Growth",
+          "amount": 1
+        },
+        {
+          "name": "Sphinx Mindbreaker",
+          "amount": 1
+        },
+        {
+          "name": "Surgeon General Commander",
+          "amount": 1
+        },
+        {
+          "name": "Blightsteel Colossus",
+          "amount": 1
+        },
+        {
+          "name": "Metamorphosis",
+          "amount": 1
+        },
+        {
+          "name": "Chatterfang, Squirrel General",
+          "amount": 1
+        },
+        {
+          "name": "Krark-Clan Ironworks",
+          "amount": 1
+        },
+        {
+          "name": "Sword of Feast and Famine",
+          "amount": 1
+        },
+        {
+          "name": "Souvenir Snatcher",
+          "amount": 1
+        },
+        {
+          "name": "Crawlspace",
+          "amount": 1
+        },
+        {
+          "name": "Repercussion",
+          "amount": 1
+        },
+        {
+          "name": "Nesting Dragon",
+          "amount": 1
+        },
+        {
+          "name": "Blot Out the Sky",
+          "amount": 1
+        },
+        {
+          "name": "Ghired's Belligerence",
+          "amount": 1
+        },
+        {
+          "name": "Fury Storm",
+          "amount": 1
+        },
+        {
+          "name": "Skull Storm",
+          "amount": 1
+        },
+        {
+          "name": "Dominate",
+          "amount": 1
+        },
+        {
+          "name": "Terrain Generator",
+          "amount": 1
+        },
+        {
+          "name": "Overabundance",
+          "amount": 1
+        },
+        {
+          "name": "Exhume",
+          "amount": 1
+        },
+        {
+          "name": "Time of Need",
+          "amount": 1
+        },
+        {
+          "name": "Karona, False God",
+          "amount": 1
+        },
+        {
+          "name": "Phyrexian Tyranny",
+          "amount": 1
+        },
+        {
+          "name": "Sigil of Distinction",
+          "amount": 1
+        },
+        {
+          "name": "Shield of the Avatar",
+          "amount": 1
+        },
+        {
+          "name": "Planar Portal",
+          "amount": 1
+        },
+        {
+          "name": "Mirari",
+          "amount": 1
+        },
+        {
+          "name": "Grave Consequences",
+          "amount": 1
+        },
+        {
+          "name": "Helvault",
+          "amount": 1
+        },
+        {
+          "name": "Leveler",
+          "amount": 1
+        },
+        {
+          "name": "Grim Feast",
+          "amount": 1
+        },
+        {
+          "name": "Debt to the Deathless",
+          "amount": 1
+        },
+        {
+          "name": "Tainted Sigil",
+          "amount": 1
+        },
+        {
+          "name": "Arjun, the Shifting Flame",
+          "amount": 1
+        },
+        {
+          "name": "Karametra, God of Harvests",
+          "amount": 1
+        },
+        {
+          "name": "Yannik, Scavenging Sentinel",
+          "amount": 1
+        },
+        {
+          "name": "Isolation Cell",
+          "amount": 1
+        },
+        {
+          "name": "Gauntlet of Power",
+          "amount": 1
+        },
+        {
+          "name": "Nesting Grounds",
+          "amount": 1
+        },
+        {
+          "name": "Tower of the Magistrate",
+          "amount": 1
+        },
+        {
+          "name": "Tectonic Edge",
+          "amount": 1
+        },
+        {
+          "name": "Tandem Lookout",
+          "amount": 1
+        },
+        {
+          "name": "Ophidian Eye",
+          "amount": 1
+        },
+        {
+          "name": "Natural Affinity",
+          "amount": 1
+        },
+        {
+          "name": "Oath of Druids",
+          "amount": 1
+        },
+        {
+          "name": "Nature's Resurgence",
+          "amount": 1
+        },
+        {
+          "name": "Frontier Siege",
+          "amount": 1
+        },
+        {
+          "name": "Mark of Sakiko",
+          "amount": 1
+        },
+        {
+          "name": "Dual Nature",
+          "amount": 1
+        },
+        {
+          "name": "Wild Beastmaster",
+          "amount": 1
+        },
+        {
+          "name": "Spontaneous Generation",
+          "amount": 1
+        },
+        {
+          "name": "Ambush Commander",
+          "amount": 1
+        },
+        {
+          "name": "Perilous Forays",
+          "amount": 1
+        },
+        {
+          "name": "Luminarch Ascension",
+          "amount": 1
+        },
+        {
+          "name": "Oath of Lieges",
+          "amount": 1
+        },
+        {
+          "name": "Plagiarize",
+          "amount": 1
+        },
+        {
+          "name": "Opposition",
+          "amount": 1
+        },
+        {
+          "name": "Dream Tides",
+          "amount": 1
+        },
+        {
+          "name": "Siren's Call",
+          "amount": 1
+        },
+        {
+          "name": "Dross Harvester",
+          "amount": 1
+        },
+        {
+          "name": "Tortured Existence",
+          "amount": 1
+        },
+        {
+          "name": "Ghoulcaller Gisa",
+          "amount": 1
+        },
+        {
+          "name": "Twinflame",
+          "amount": 1
+        },
+        {
+          "name": "Port Razer",
+          "amount": 1
+        },
+        {
+          "name": "Valakut Exploration",
+          "amount": 1
+        },
+        {
+          "name": "Trove Warden",
+          "amount": 1
+        },
+        {
+          "name": "Soul Barrier",
+          "amount": 1
+        },
+        {
+          "name": "Hellkite Courser",
+          "amount": 1
+        },
+        {
+          "name": "Share the Spoils",
+          "amount": 1
+        },
+        {
+          "name": "Rousing Refrain",
+          "amount": 1
+        },
+        {
+          "name": "Praetor's Counsel",
+          "amount": 1
+        },
+        {
+          "name": "Sylvan Offering",
+          "amount": 1
+        },
+        {
+          "name": "Dictate of Karametra",
+          "amount": 1
+        },
+        {
+          "name": "Everlasting Torment",
+          "amount": 1
+        },
+        {
+          "name": "Tana, the Bloodsower",
+          "amount": 1
+        },
+        {
+          "name": "Kydele, Chosen of Kruphix",
+          "amount": 1
+        },
+        {
+          "name": "Stifle",
+          "amount": 1
+        },
+        {
+          "name": "Shadrix Silverquill",
+          "amount": 1
+        },
+        {
+          "name": "Mathas, Fiend Seeker",
+          "amount": 1
+        },
+        {
+          "name": "Hunted Dragon",
+          "amount": 1
+        },
+        {
+          "name": "Geode Rager",
+          "amount": 1
+        },
+        {
+          "name": "Alliance of Arms",
+          "amount": 1
+        },
+        {
+          "name": "Tempt with Vengeance",
+          "amount": 1
+        },
+        {
+          "name": "Benevolent Offering",
+          "amount": 1
+        },
+        {
+          "name": "Infernal Offering",
+          "amount": 1
+        },
+        {
+          "name": "Crown of Doom",
+          "amount": 1
+        },
+        {
+          "name": "Curse of Disturbance",
+          "amount": 1
+        },
+        {
+          "name": "Crescendo of War",
+          "amount": 1
+        },
+        {
+          "name": "Curse of Stalked Prey",
+          "amount": 1
+        },
+        {
+          "name": "Decree of Annihilation",
+          "amount": 1
+        },
+        {
+          "name": "Slobad, Goblin Tinkerer",
+          "amount": 1
+        },
+        {
+          "name": "Twist Allegiance",
+          "amount": 1
+        },
+        {
+          "name": "In the Web of War",
+          "amount": 1
+        },
+        {
+          "name": "Wild Evocation",
+          "amount": 1
+        },
+        {
+          "name": "Invasion Plans",
+          "amount": 1
+        },
+        {
+          "name": "Inferno Titan",
+          "amount": 1
+        },
+        {
+          "name": "Thoughts of Ruin",
+          "amount": 1
+        },
+        {
+          "name": "New Frontiers",
+          "amount": 1
+        },
+        {
+          "name": "Magus of the Candelabra",
+          "amount": 1
+        },
+        {
+          "name": "Verdeloth the Ancient",
+          "amount": 1
+        },
+        {
+          "name": "Keeper of Progenitus",
+          "amount": 1
+        },
+        {
+          "name": "Wolfbriar Elemental",
+          "amount": 1
+        },
+        {
+          "name": "Call of the Wild",
+          "amount": 1
+        },
+        {
+          "name": "Savage Summoning",
+          "amount": 1
+        },
+        {
+          "name": "Mana Bloom",
+          "amount": 1
+        },
+        {
+          "name": "Enshrined Memories",
+          "amount": 1
+        },
+        {
+          "name": "Hydra Broodmaster",
+          "amount": 1
+        },
+        {
+          "name": "Seed the Land",
+          "amount": 1
+        },
+        {
+          "name": "Insist",
+          "amount": 1
+        },
+        {
+          "name": "Pyromancer's Gauntlet",
+          "amount": 1
+        },
+        {
+          "name": "Iname, Death Aspect",
+          "amount": 1
+        },
+        {
+          "name": "Tempt with Immortality",
+          "amount": 1
+        },
+        {
+          "name": "Shared Trauma",
+          "amount": 1
+        },
+        {
+          "name": "Night Dealings",
+          "amount": 1
+        },
+        {
+          "name": "Liability",
+          "amount": 1
+        },
+        {
+          "name": "Kothophed, Soul Hoarder",
+          "amount": 1
+        },
+        {
+          "name": "Empty the Pits",
+          "amount": 1
+        },
+        {
+          "name": "Disciple of Bolas",
+          "amount": 1
+        },
+        {
+          "name": "Death Match",
+          "amount": 1
+        },
+        {
+          "name": "Blood Funnel",
+          "amount": 1
+        },
+        {
+          "name": "Burning Sands",
+          "amount": 1
+        },
+        {
+          "name": "Amulet of Vigor",
+          "amount": 1
+        },
+        {
+          "name": "Rogue Class",
+          "amount": 1
+        },
+        {
+          "name": "Lashwrithe",
+          "amount": 0
+        },
+        {
+          "name": "Abjure",
+          "amount": 0
+        },
+        {
+          "name": "Increasing Ambition",
+          "amount": 0
+        },
+        {
+          "name": "Walking Atlas",
+          "amount": 0
+        },
+        {
+          "name": "Stinging Study",
+          "amount": 0
+        },
+        {
+          "name": "Insurrection",
+          "amount": 0
+        },
+        {
+          "name": "Crab Umbra",
+          "amount": 0
+        },
+        {
+          "name": "Mogg Infestation",
+          "amount": 0
+        },
+        {
+          "name": "Mana Maze",
+          "amount": 0
+        },
+        {
+          "name": "From the Ashes",
+          "amount": 0
+        },
+        {
+          "name": "Split Decision",
+          "amount": 0
+        },
+        {
+          "name": "Towering Titan",
+          "amount": 0
+        },
+        {
+          "name": "Sprouting Vines",
+          "amount": 0
+        },
+        {
+          "name": "Mitotic Slime",
+          "amount": 1
+        },
+        {
+          "name": "Ishai, Ojutai Dragonspeaker",
+          "amount": 0
+        },
+        {
+          "name": "Elemental Mastery",
+          "amount": 0
+        },
+        {
+          "name": "Ophiomancer",
+          "amount": 0
+        },
+        {
+          "name": "Harmonic Prodigy",
+          "amount": 0
+        },
+        {
+          "name": "Explore",
+          "amount": 1
+        },
+        {
+          "name": "Viridian Revel",
+          "amount": 0
+        },
+        {
+          "name": "Collector Ouphe",
+          "amount": 0
+        },
+        {
+          "name": "Sasaya, Orochi Ascendant",
+          "amount": 0
+        },
+        {
+          "name": "Deadly Rollick",
+          "amount": 0
+        },
+        {
+          "name": "Toothy, Imaginary Friend",
+          "amount": 0
+        },
+        {
+          "name": "Nirkana Revenant",
+          "amount": 0
+        },
+        {
+          "name": "Tombstone Stairwell",
+          "amount": 0
+        },
+        {
+          "name": "Lifeline",
+          "amount": 0
+        },
+        {
+          "name": "Overburden",
+          "amount": 0
+        },
+        {
+          "name": "Bounty Hunter",
+          "amount": 0
+        },
+        {
+          "name": "Noetic Scales",
+          "amount": 0
+        },
+        {
+          "name": "Oath of Ghouls",
+          "amount": 0
+        },
+        {
+          "name": "Winding Canyons",
+          "amount": 0
+        },
+        {
+          "name": "Hermit Druid",
+          "amount": 0
+        },
+        {
+          "name": "Parallel Evolution",
+          "amount": 0
+        },
+        {
+          "name": "Kaldra Compleat",
+          "amount": 0
+        },
+        {
+          "name": "Ritual of the Machine",
+          "amount": 0
+        },
+        {
+          "name": "Pygmy Hippo",
+          "amount": 0
+        },
+        {
+          "name": "Vile Consumption",
+          "amount": 0
+        },
+        {
+          "name": "Ramos, Dragon Engine",
+          "amount": 0
+        },
+        {
+          "name": "Sylvan Library",
+          "amount": 0
+        },
+        {
+          "name": "Exploration",
+          "amount": 0
+        },
+        {
+          "name": "Old Gnawbone",
+          "amount": 0
+        },
+        {
+          "name": "Imperial Recruiter",
+          "amount": 0
+        },
+        {
+          "name": "City of Solitude",
+          "amount": 0
+        },
+        {
+          "name": "Dream Halls",
+          "amount": 0
+        },
+        {
+          "name": "Minamo, School at Water's Edge",
+          "amount": 0
+        },
+        {
+          "name": "Xantcha, Sleeper Agent",
+          "amount": 0
+        },
+        {
+          "name": "Visions of Dominance",
+          "amount": 0
+        },
+        {
+          "name": "Visions of Dread",
+          "amount": 0
+        },
+        {
+          "name": "Visions of Glory",
+          "amount": 0
+        },
+        {
+          "name": "Visions of Duplicity",
+          "amount": 0
+        },
+        {
+          "name": "Visions of Ruin",
+          "amount": 0
+        },
+        {
+          "name": "Lynde, Cheerful Tormentor",
+          "amount": 0
+        },
+        {
+          "name": "Kyler, Sigardian Emissary",
+          "amount": 0
+        },
+        {
+          "name": "Curse of Conformity",
+          "amount": 0
+        },
+        {
+          "name": "Moorland Rescuer",
+          "amount": 0
+        },
+        {
+          "name": "Sigarda's Vanguard",
+          "amount": 0
+        },
+        {
+          "name": "Celebrate the Harvest",
+          "amount": 0
+        },
+        {
+          "name": "Curse of Clinging Webs",
+          "amount": 0
+        },
+        {
+          "name": "Heronblade Elite",
+          "amount": 0
+        },
+        {
+          "name": "Kurbis, Harvest Celebrant",
+          "amount": 0
+        },
+        {
+          "name": "Ruinous Intrusion",
+          "amount": 0
+        },
+        {
+          "name": "Somberwald Beastmaster",
+          "amount": 0
+        },
+        {
+          "name": "Kessig Cagebreakers",
+          "amount": 0
+        },
+        {
+          "name": "Gutter Grime",
+          "amount": 0
+        },
+        {
+          "name": "Moldgraf Monstrosity",
+          "amount": 0
+        },
+        {
+          "name": "Outmaneuver",
+          "amount": 0
+        },
+        {
+          "name": "Concordant Crossroads",
+          "amount": 0
+        },
+        {
+          "name": "K'rrik, Son of Yawgmoth",
+          "amount": 0
+        },
+        {
+          "name": "Agent of Erebos",
+          "amount": 0
+        },
+        {
+          "name": "Ordeal of Erebos",
+          "amount": 0
+        },
+        {
+          "name": "Acidic Slime",
+          "amount": 1
+        }
+      ],
+      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbHNvbW51cyIsImlhdCI6MTY2MzYyOTc3NX0.lUIcrSZ8FSo2n0UAZozjd5CqFpAzDh9lEjGFK9Mw-P0"
+    }
+  ]
+}

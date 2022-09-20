@@ -49,7 +49,7 @@ export default function App(props) {
 
     async function getCards() {
         if (process.env.NODE_ENV === 'development') {
-            const db = require('./server/db.json');
+            const db = require('./fake_db.json');
             cardDataContext.setCardsList(db.users[0].cards);
         }
         else {
