@@ -12,7 +12,6 @@
 /data/mtg.json
 /build
 /src/server/db.json
-/src/lessmtg.json
 secret.js
 secret.json
 digital_ocean_ssh_key.txt
