@@ -197,6 +197,9 @@ app.get('/ping', (req, res) => {
     return res.send('pong')
 });
 
-const port = 3000;
+const port = {
+    development: 3000,
+    production: 80,
+}[process.env.NODE_ENV] || 80;
 console.log('Listening on port', port);
 app.listen(port);
