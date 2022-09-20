@@ -11,9 +11,11 @@
 # production
 /data/
 /build
-/src/server/db.json
+db.json
 secret.js
 secret.json
+_secret.js
+_secret.json
 digital_ocean_ssh_key.txt
 digital_ocean_ssh_key.txt.pub
 digital_ocean_github_access_token.txt

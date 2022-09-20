@@ -6,7 +6,9 @@ import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import bcrypt from 'bcrypt';
-import SECRET from './secret.js';
+// import SECRET from './secret.js';
+
+const SECRET = process.env.secret || '1234';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
