@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/data/mtg.json
+/data/
 /build
 /src/server/db.json
 secret.js

@@ -35,8 +35,6 @@ To do:
 
 window.logout = () => axios.get('/logout');
 
-console.log('process.env', process.env)
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 export default function App(props) {
     const [cardsTrie, setCardsTrie] = useState({});
@@ -50,25 +48,23 @@ export default function App(props) {
     //
 
     async function getCards() {
-        if (process.env.NODE_ENV === 'development') {
+        try {
+            const res = await axios.get('/getcards');
+            cardDataContext.setCardsList(res.data);
+        }
+        catch (e) {
+            console.log(e)
+            if (e?.response?.status === 403) {
+                console.error('Error: not logged in');
+                setShowLogin(true);
+            }
+            else {
+                console.error('Unexpected error', e);
+            }
+
+            console.log('Failed to get cards from server; using fake db instead');
             const db = require('./fake_db.json');
             cardDataContext.setCardsList(db.users[0].cards);
-        }
-        else {
-            try {
-                const res = await axios.get('/getcards');
-                cardDataContext.setCardsList(res.data);
-            }
-            catch (e) {
-                console.log(e)
-                if (e?.response?.status === 403) {
-                    console.error('Error: not logged in');
-                    setShowLogin(true);
-                }
-                else {
-                    console.error('Unexpected error', e);
-                }
-            }
         }
     }
 

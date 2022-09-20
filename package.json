@@ -31,7 +31,7 @@
     "fetchdata": "node fetchdata.js",
     "extractdata": "node extractdata.js",
     "_server": "node-env-run server --exec nodemon | pino-colada",
-    "server": "cross-env NODE_DISABLE_COLORS=1 NODE_ENV=development node ./server.js"
+    "server": "cross-env NODE_DISABLE_COLORS=1 node ./server.js"
   },
   "eslintConfig": {
     "extends": [
