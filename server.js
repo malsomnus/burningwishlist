@@ -195,5 +195,6 @@ const port = {
     development: 3000,
     production: 8080,
 }[process.env.NODE_ENV] || 8080;
+console.log(process.env);
 console.log('Listening on port', port);
 app.listen(port);
