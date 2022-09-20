@@ -24,14 +24,14 @@
     "cross-env": "^7.0.3"
   },
   "scripts": {
-    "_start": "react-scripts start",
+    "start": "react-scripts start",
     "build": "cross-env NODE_DISABLE_COLORS=1 react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "fetchdata": "node fetchdata.js",
     "extractdata": "node extractdata.js",
     "_server": "node-env-run server --exec nodemon | pino-colada",
-    "start": "cross-env NODE_DISABLE_COLORS=1 node ./server.js"
+    "server": "cross-env NODE_DISABLE_COLORS=1 node ./server.js"
   },
   "eslintConfig": {
     "extends": [

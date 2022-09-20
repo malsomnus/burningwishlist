@@ -199,7 +199,7 @@ app.get('/ping', (req, res) => {
 
 const port = {
     development: 3000,
-    production: 80,
-}[process.env.NODE_ENV] || 80;
+    production: 8080,
+}[process.env.NODE_ENV] || 8080;
 console.log('Listening on port', port);
 app.listen(port);
