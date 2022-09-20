@@ -75,24 +75,25 @@ async function getUserObject(req) {
 // });
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-app.get('/createuser', async (req, res) => {
-    const { username, password } = req.query;
-    
-    bcrypt.hash(password, 10, async function(err, hash) {
-        const db = getDb();
-        await db.read();
-        db.data ||= { users: [] };
-        const { users } = db.data;
-        users.push({ 
-            username: username, 
-            password: hash,
-            cards: [],
-        });
-        await db.write(); 
 
-        res.status(200).send('Good job');
-    });
-});
+// app.get('/createuser', async (req, res) => {
+//     const { username, password } = req.query;
+    
+//     bcrypt.hash(password, 10, async function(err, hash) {
+//         const db = getDb();
+//         await db.read();
+//         db.data ||= { users: [] };
+//         const { users } = db.data;
+//         users.push({ 
+//             username: username, 
+//             password: hash,
+//             cards: [],
+//         });
+//         await db.write(); 
+
+//         res.status(200).send('Good job');
+//     });
+// });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
