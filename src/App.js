@@ -1,35 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import TrieSearch from 'trie-search';
 import axios from 'axios';
-import { useUiContext } from './UiContext';
+// import { useUiContext } from './UiContext';
 import { useCardDataContext } from './CardDataContext';
 import Login from './Login';
-import AddCardModal from './AddCardModal';
-import ObtainCardModal from './ObtainCardModal';
-import CardNamePanel from './CardNamePanel';
 import Playground from './playground/playground';
 import Main from './Main.js';
 import './App.scss';
 
 // Mana font taken from https://github.com/gbartholomeu/mtg-minimalist-proxies
 import './manafont/mana.scss';
-
-/*
-
-To do:
-- Add card text to ObtainCardModal
-- Sort list by obtained > color > alphabetically
-- Make obtained cards collapsible
-- Print list
-- Show in AddCardModal if a given card is already obtained
-- Server side code to prevent adding a card that doesn't exist
-- Cache
-- Host this somewhere
-
-
-
-*/
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -42,7 +22,7 @@ export default function App(props) {
 
     const [playground, setPlayground] = useState(false);
 
-    const uiContext = useUiContext();
+    // const uiContext = useUiContext();
     const cardDataContext = useCardDataContext();
 
     //

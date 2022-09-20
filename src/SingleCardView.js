@@ -1,5 +1,5 @@
 import { useCardDataContext } from './CardDataContext';
-import { ManaCost, ManaSymbol } from './manacost.js';
+import { ManaCost } from './manacost.js';
 import './SingleCardView.scss';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
