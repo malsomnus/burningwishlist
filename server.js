@@ -76,14 +76,7 @@ async function getUserObject(req) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 app.get('/createuser', async (req, res) => {
-
-    res.status(500).send('Woah there, remember to actually update this thing to work with a proper not-hardcoded username and password');
-
-
-
-
-    const username = 'malsomnus';
-    const password = '#passWORD1';
+    const { username, password } = req.query;
     
     bcrypt.hash(password, 10, async function(err, hash) {
         const db = getDb();
