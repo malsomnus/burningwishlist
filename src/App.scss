@@ -12,10 +12,17 @@ body {
     display: flex;
     justify-content: center;
     background-color: #999;
+
+    #root {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
 }
 
 .app {
     width: 100%;
+    max-width: 600px;
     height: 100%;
     background-color: #fff;
     display: flex;

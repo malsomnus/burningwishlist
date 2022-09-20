@@ -42,9 +42,9 @@ export default function App(props) {
                 console.error('Unexpected error', e);
             }
 
-            console.log('Failed to get cards from server; using fake db instead');
-            const db = require('./fake_db.json');
-            cardDataContext.setCardsList(db.users[0].cards);
+            // console.log('Failed to get cards from server; using fake db instead');
+            // const db = require('./fake_db.json');
+            // cardDataContext.setCardsList(db.users[0].cards);
         }
     }
 
