@@ -35,6 +35,8 @@ To do:
 
 window.logout = () => axios.get('/logout');
 
+console.log('process.env', process.env)
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 export default function App(props) {
     const [cardsTrie, setCardsTrie] = useState({});
